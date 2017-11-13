@@ -151,15 +151,6 @@
                             return;
                         }
 
-                        if (typeof $window.Hammer !== 'undefined') {
-                            var hammerTime = scope.hammerTime;
-                            hammerTime.off('tap', closeByDocumentHandler);
-                            hammerTime.destroy && hammerTime.destroy();
-                            delete scope.hammerTime;
-                        } else {
-                            $dialog.unbind('click');
-                        }
-
                         if (dialogsCount === 1) {
                             $elements.body.unbind('keydown', privateMethods.onDocumentKeydown);
                         }
@@ -717,13 +708,6 @@
                                     publicMethods.close($dialog.attr('id'), isCloseBtn ? '$closeButton' : '$document');
                                 }
                             };
-
-                            if (typeof $window.Hammer !== 'undefined') {
-                                var hammerTime = scope.hammerTime = $window.Hammer($dialog[0]);
-                                hammerTime.on('tap', closeByDocumentHandler);
-                            } else {
-                                $dialog.bind('click', closeByDocumentHandler);
-                            }
 
                             dialogsCount += 1;
 
